@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Comfort & Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:       #F7F2EB;
+      --warm-white:  #FDFAF5;
+      --brown:       #6B4226;
+      --brown-light: #9C6B45;
+      --gold:        #C4973A;
+      --gold-light:  #E2BA6A;
+      --text-dark:   #2C1A0E;
+      --text-mid:    #6B5744;
+      --text-light:  #A8917E;
+      --border:      #E0D5C5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: var(--brown);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #F7F2EB;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold-light); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 12rem 6rem 6rem;
+      background: linear-gradient(135deg, var(--cream) 0%, #EDE0D0 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .hero-left p.eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 0.3rem;
+    }
+
+    .hero-left h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.05;
+    }
+
+    .hero-left h1 em {
+      font-style: italic;
+      color: var(--brown);
+      display: block;
+    }
+
+    .hero-right {
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-right p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      max-width: 400px;
+    }
+
+    .hero-stat-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .hero-stat h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1;
+    }
+
+    .hero-stat p {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.3rem;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--warm-white);
+      padding: 1.8rem 6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+    }
+
+    .filter-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.4rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .filter-btn.active {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+
+    .filter-count {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* ── PROJECTS GRID ── */
+    .projects-section {
+      padding: 4rem 6rem 6rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* alternating layout — editorial feel */
+    .project-card { position: relative; overflow: hidden; cursor: pointer; border-radius: 12px; }
+
+    .project-card.large { grid-column: span 7; }
+    .project-card.small { grid-column: span 5; }
+    .project-card.medium { grid-column: span 6; }
+    .project-card.wide   { grid-column: span 12; }
+
+    .project-card.hidden { display: none; }
+
+    .project-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .project-card.large  .project-img { height: 520px; }
+    .project-card.small  .project-img { height: 520px; }
+    .project-card.medium .project-img { height: 400px; }
+    .project-card.wide   .project-img { height: 360px; }
+
+    .project-card:hover .project-img { transform: scale(1.04); }
+
+    /* overlay on hover */
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,26,14,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    .project-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-meta {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.08em;
+    }
+
+    .project-sofa {
+      margin-top: 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 0.8rem;
+    }
+
+    /* always-visible caption below image (no hover needed) */
+    .project-caption {
+      padding: 1rem 0 0.5rem;
+    }
+
+    .project-caption .project-tag {
+      color: var(--gold);
+      opacity: 1;
+    }
+
+    .project-caption .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      font-weight: 400;
+    }
+
+    .project-caption .project-meta {
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      background: var(--brown);
+      padding: 5rem 6rem;
+      text-align: center;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .pull-quote blockquote em { color: var(--gold-light); }
+
+    .pull-quote cite {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-style: normal;
+    }
+
+    /* ── CTA ── */
+    .cta-banner {
+      background: var(--cream);
+      padding: 5rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .cta-banner h2 em { font-style: italic; color: var(--brown); }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: var(--brown);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-left: 3rem;
+      transition: background 0.25s;
+    }
+
+    .btn-primary:hover { background: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0F08;
+      padding: 4rem 6rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.9;
+      max-width: 260px;
+      margin-top: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(196,151,58,0.3);
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold-light); padding-left: 4px; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html">Collection</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">Our Story</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-left">
+      <p class="eyebrow">Selected Works</p>
+      <h1>Spaces We<br><em>Have Loved</em></h1>
+    </div>
+    <div class="hero-right">
+      <p>Every project is a collaboration between a sofa and the room it belongs to. Here are six spaces where we think we got it right.</p>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <h3>48+</h3>
+          <p>Projects Completed</p>
+        </div>
+        <div class="hero-stat">
+          <h3>11</h3>
+          <p>Cities Across India</p>
+        </div>
+        <div class="hero-stat">
+          <h3>6</h3>
+          <p>Sofa Designs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter by</span>
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('residential', this)">Residential</button>
+    <button class="filter-btn" onclick="filterProjects('commercial', this)">Commercial</button>
+    <button class="filter-btn" onclick="filterProjects('hospitality', this)">Hospitality</button>
+    <span class="filter-count" id="filterCount">Showing 6 projects</span>
+  </div>
+
+  <!-- PROJECTS -->
+  <section class="projects-section">
+    <div class="projects-grid" id="projectsGrid">
+
+      <!-- Row 1: large + small -->
+      <div class="project-card large" data-type="residential">
+        <img class="project-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80" alt="Alipore Penthouse"/>
+        <div class="project-overlay">
+          <p class="project-tag">Residential</p>
+          <h3 class="project-name">The Alipore Penthouse</h3>
+          <p class="project-meta">Kolkata, West Bengal · 2024</p>
+          <p class="project-sofa">Sofa: The Darbar — Ivory Linen</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Residential</p>
+          <p class="project-name">The Alipore Penthouse</p>
+          <p class="project-meta">Kolkata · The Darbar</p>
+        </div>
+      </div>
+
+      <div class="project-card small" data-type="hospitality">
+        <img class="project-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80" alt="Jodhpur Boutique Hotel"/>
+        <div class="project-overlay">
+          <p class="project-tag">Hospitality</p>
+          <h3 class="project-name">Raas Jodhpur</h3>
+          <p class="project-meta">Jodhpur, Rajasthan · 2024</p>
+          <p class="project-sofa">Sofa: The Haveli — Terracotta Velvet</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Hospitality</p>
+          <p class="project-name">Raas Jodhpur</p>
+          <p class="project-meta">Jodhpur · The Haveli</p>
+        </div>
+      </div>
+
+      <!-- Row 2: three medium -->
+      <div class="project-card medium" data-type="commercial">
+        <img class="project-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="Bandra Office"/>
+        <div class="project-overlay">
+          <p class="project-tag">Commercial</p>
+          <h3 class="project-name">Studio Bandra</h3>
+          <p class="project-meta">Mumbai, Maharashtra · 2024</p>
+          <p class="project-sofa">Sofa: The Mehfil — Slate Grey</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Commercial</p>
+          <p class="project-name">Studio Bandra</p>
+          <p class="project-meta">Mumbai · The Mehfil</p>
+        </div>
+      </div>
+
+      <div class="project-card medium" data-type="residential">
+        <img class="project-img" src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=700&q=80" alt="Ballygunge Residence"/>
+        <div class="project-overlay">
+          <p class="project-tag">Residential</p>
+          <h3 class="project-name">The Ballygunge Residence</h3>
+          <p class="project-meta">Kolkata, West Bengal · 2023</p>
+          <p class="project-sofa">Sofa: The Sandhya — Warm Beige</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Residential</p>
+          <p class="project-name">The Ballygunge Residence</p>
+          <p class="project-meta">Kolkata · The Sandhya</p>
+        </div>
+      </div>
+
+      <!-- Row 3: small + large -->
+      <div class="project-card small" data-type="residential">
+        <img class="project-img" src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=700&q=80" alt="Indiranagar Home"/>
+        <div class="project-overlay">
+          <p class="project-tag">Residential</p>
+          <h3 class="project-name">The Indiranagar Home</h3>
+          <p class="project-meta">Bengaluru, Karnataka · 2023</p>
+          <p class="project-sofa">Sofa: The Verandah — Olive Green</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Residential</p>
+          <p class="project-name">The Indiranagar Home</p>
+          <p class="project-meta">Bengaluru · The Verandah</p>
+        </div>
+      </div>
+
+      <div class="project-card large" data-type="hospitality">
+        <img class="project-img" src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=900&q=80" alt="Udaipur Lake Resort"/>
+        <div class="project-overlay">
+          <p class="project-tag">Hospitality</p>
+          <h3 class="project-name">The Lake House, Udaipur</h3>
+          <p class="project-meta">Udaipur, Rajasthan · 2023</p>
+          <p class="project-sofa">Sofa: The Baithak — Blush Rose</p>
+        </div>
+        <div class="project-caption">
+          <p class="project-tag">Hospitality</p>
+          <p class="project-name">The Lake House, Udaipur</p>
+          <p class="project-meta">Udaipur · The Baithak</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <blockquote>"We don't just deliver sofas. We deliver the feeling of <em>finally being at home."</em></blockquote>
+    <cite>— Arjun Mehta, Founder · Comfort & Co.</cite>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>Want us to transform<br>your <em>space?</em></h2>
+    <a href="contact.html" class="btn-primary">Start a Conversation</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="display:block; margin-bottom:1rem;">Comfort <span style="color:var(--gold-light)">&</span> Co.</a>
+        <p>Sofas designed for the way you actually live. Made in India, built for every home.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="products.html">All Sofas</a></li>
+          <li><a href="#">Sectionals</a></li>
+          <li><a href="#">3-Seaters</a></li>
+          <li><a href="#">Recliners</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">hello@comfortandco.in</a></li>
+          <li><a href="#">+91 98300 00000</a></li>
+          <li><a href="#">Park Street, Kolkata</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Comfort & Co. All rights reserved.</p>
+      <p>Designed with care in Kolkata, India.</p>
+    </div>
+  </footer>
+
+  <script>
+    function filterProjects(type, btn) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      const countEl = document.getElementById('filterCount');
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      cards.forEach(card => {
+        if (type === 'all' || card.dataset.type === type) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      countEl.textContent = `Showing ${visible} project${visible !== 1 ? 's' : ''}`;
+    }
+  </script>
+
+</body>
+</html>

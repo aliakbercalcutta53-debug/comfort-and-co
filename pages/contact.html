@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Comfort & Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:       #F7F2EB;
+      --warm-white:  #FDFAF5;
+      --brown:       #6B4226;
+      --brown-light: #9C6B45;
+      --gold:        #C4973A;
+      --gold-light:  #E2BA6A;
+      --text-dark:   #2C1A0E;
+      --text-mid:    #6B5744;
+      --text-light:  #A8917E;
+      --border:      #E0D5C5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: var(--brown);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #F7F2EB;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold-light); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      min-height: 55vh;
+      background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding-top: 80px;
+      position: relative;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(44,26,14,0.55);
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-hero-content p {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.15;
+    }
+
+    .page-hero-content h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .breadcrumb {
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .breadcrumb a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--gold-light); }
+
+    /* ── GET IN TOUCH INTRO ── */
+    .contact-intro {
+      background: var(--warm-white);
+      padding: 5rem 6rem 3rem;
+      text-align: center;
+    }
+
+    .contact-intro p.eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: inline-block;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 0.3rem;
+    }
+
+    .contact-intro h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .contact-intro h2 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+
+    .contact-intro p.sub {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── ADDRESS CARDS ── */
+    .address-section {
+      padding: 3rem 6rem 5rem;
+      background: var(--warm-white);
+    }
+
+    .address-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .address-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .address-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .address-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--brown);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .address-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+      font-weight: 400;
+    }
+
+    .address-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .address-card a {
+      color: var(--brown-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .address-card a:hover { color: var(--gold); }
+
+    /* ── MAIN CONTACT SECTION ── */
+    .contact-main {
+      background: linear-gradient(135deg, #F2E8DC 0%, #EDE0D0 100%);
+      padding: 5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Left side */
+    .contact-info p.eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 0.3rem;
+    }
+
+    .contact-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info h2 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+
+    .contact-info p.body {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .hours-block {
+      background: var(--warm-white);
+      padding: 1.8rem;
+      border-left: 3px solid var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .hours-block h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.87rem;
+      color: var(--text-mid);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-row span:last-child { color: var(--brown); font-weight: 400; }
+
+    .social-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .social-btn:hover {
+      background: var(--brown);
+      border-color: var(--brown);
+    }
+
+    /* Right side — FORM */
+    .contact-form-wrap {
+      background: var(--warm-white);
+      padding: 3rem;
+      box-shadow: 0 8px 40px rgba(44,26,14,0.08);
+    }
+
+    .contact-form-wrap h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-form-wrap p.form-sub {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .checkbox-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group label.group-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--brown);
+      cursor: pointer;
+    }
+
+    .checkbox-item span {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .radio-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .radio-group label.group-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .radio-item input[type="radio"] {
+      accent-color: var(--brown);
+      cursor: pointer;
+    }
+
+    .radio-item span {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      background: rgba(196,151,58,0.1);
+      border: 1px solid var(--gold-light);
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--brown);
+      text-align: center;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--brown);
+      padding: 4rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .cta-banner h2 em { font-style: italic; color: var(--gold-light); }
+
+    .btn-light {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-left: 3rem;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .btn-light:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0F08;
+      padding: 5rem 6rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.9;
+      max-width: 220px;
+      margin-top: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(196,151,58,0.3);
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold-light); padding-left: 4px; }
+
+    .newsletter-form {
+      display: flex;
+      margin-top: 0.5rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-right: none;
+      color: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+
+    .newsletter-form button {
+      padding: 0.7rem 1rem;
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .newsletter-form button:hover { background: var(--gold-light); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html">Collection</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">Our Story</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <p>We'd Love to Hear From You</p>
+      <h1>Let's Find Your<br><em>Perfect Sofa Together</em></h1>
+      <p class="breadcrumb"><a href="../index.html">Home</a> &nbsp;/&nbsp; Contact Us</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="contact-intro">
+    <p class="eyebrow">Get in Touch</p>
+    <h2>A Conversation is Where <em>It All Begins</em></h2>
+    <p class="sub">Whether you want to visit our showroom, ask about a sofa, discuss a custom order, or simply need help choosing — we are here. Reach out and we will get back to you within one working day.</p>
+  </section>
+
+  <!-- ADDRESS CARDS -->
+  <section class="address-section">
+    <div class="address-grid">
+      <div class="address-card">
+        <div class="address-icon">📍</div>
+        <div>
+          <h4>Showroom Address</h4>
+          <p>12 Park Street, Ground Floor<br>Kolkata — 700 016, West Bengal</p>
+        </div>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🕐</div>
+        <div>
+          <h4>Opening Hours</h4>
+          <p>Mon – Sat: 10:00 am – 8:00 pm<br>Sunday: Open by Appointment</p>
+        </div>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">📞</div>
+        <div>
+          <h4>Contact Details</h4>
+          <p>Phone: <a href="tel:+919830000000">+91 98300 00000</a><br>Email: <a href="mailto:hello@comfortandco.in">hello@comfortandco.in</a></p>
+        </div>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🚗</div>
+        <div>
+          <h4>Getting Here</h4>
+          <p>Nearest Metro: Park Street Station<br>Parking available on Middleton Row</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT MAIN -->
+  <section class="contact-main">
+
+    <!-- LEFT: INFO + HOURS -->
+    <div class="contact-info">
+      <p class="eyebrow">Visit or Write to Us</p>
+      <h2>We Are Always <em>Happy to Help</em></h2>
+      <p class="body">Our team is small and attentive. When you reach out, you speak to someone who knows every sofa we make — not a call centre. We take the time to understand your space, your needs and your budget before making any suggestion.</p>
+
+      <div class="hours-block">
+        <h4>Showroom Hours</h4>
+        <div class="hours-row"><span>Monday – Friday</span><span>10:00 am – 8:00 pm</span></div>
+        <div class="hours-row"><span>Saturday</span><span>10:00 am – 8:00 pm</span></div>
+        <div class="hours-row"><span>Sunday</span><span>By Appointment Only</span></div>
+        <div class="hours-row"><span>Public Holidays</span><span>Closed</span></div>
+      </div>
+
+      <div class="social-row">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">📷</a>
+        <a href="#" class="social-btn">▶</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="contact-form-wrap">
+      <h3>Send Us a Message</h3>
+      <p class="form-sub">Please help us understand your requirement</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" placeholder="Enter your first name"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" placeholder="Enter your last name"/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="Enter your email"/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 00000 00000"/>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <label class="group-label">Which sofas are you interested in?</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox"/> <span>Sectionals</span></label>
+          <label class="checkbox-item"><input type="checkbox"/> <span>3-Seaters</span></label>
+          <label class="checkbox-item"><input type="checkbox"/> <span>2-Seaters</span></label>
+          <label class="checkbox-item"><input type="checkbox"/> <span>Recliners</span></label>
+          <label class="checkbox-item"><input type="checkbox"/> <span>Custom Order</span></label>
+          <label class="checkbox-item"><input type="checkbox"/> <span>Not Sure Yet</span></label>
+        </div>
+      </div>
+
+      <div class="radio-group">
+        <label class="group-label">Is this for a home or a commercial space?</label>
+        <div class="radio-row">
+          <label class="radio-item"><input type="radio" name="space" value="residential"/> <span>Residential</span></label>
+          <label class="radio-item"><input type="radio" name="space" value="commercial"/> <span>Commercial</span></label>
+          <label class="radio-item"><input type="radio" name="space" value="unsure"/> <span>Not Sure</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Which area are you located in? *</label>
+        <select>
+          <option value="">Select your city</option>
+          <option>Kolkata</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bengaluru</option>
+          <option>Chennai</option>
+          <option>Hyderabad</option>
+          <option>Pune</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea placeholder="Tell us about your space, your needs, or anything else you'd like us to know..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="handleSubmit()">Send Message →</button>
+      <div class="success-msg" id="successMsg">
+        ✓ Thank you. We have received your message and will be in touch within one working day.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <h2>Rather browse first?<br><em>Our full collection awaits.</em></h2>
+    <a href="products.html" class="btn-light">View All Sofas</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="display:block; margin-bottom:1rem;">Comfort <span style="color:var(--gold-light)">&</span> Co.</a>
+        <p>Sofas designed for the way you actually live. Made in India, built for every home.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="products.html">All Sofas</a></li>
+          <li><a href="#">Sectionals</a></li>
+          <li><a href="#">3-Seaters</a></li>
+          <li><a href="#">Recliners</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">hello@comfortandco.in</a></li>
+          <li><a href="#">+91 98300 00000</a></li>
+          <li><a href="#">Park Street, Kolkata</a></li>
+          <li><a href="#">Mon–Sat, 10am–8pm</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="font-size:0.85rem; color:rgba(255,255,255,0.4); line-height:1.7; margin-bottom:1rem;">Subscribe for new collections and offers.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email"/>
+          <button>→</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Comfort & Co. All rights reserved.</p>
+      <p>Designed with care in Kolkata, India.</p>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit() {
+      const msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>

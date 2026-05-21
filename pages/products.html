@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collection — Comfort & Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:       #F7F2EB;
+      --warm-white:  #FDFAF5;
+      --brown:       #6B4226;
+      --brown-light: #9C6B45;
+      --gold:        #C4973A;
+      --gold-light:  #E2BA6A;
+      --text-dark:   #2C1A0E;
+      --text-mid:    #6B5744;
+      --text-light:  #A8917E;
+      --border:      #E0D5C5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: var(--brown);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #F7F2EB;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold-light); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--cream) 0%, #EDE0D0 100%);
+      padding: 10rem 6rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .page-hero-left p {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-hero-left h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .page-hero-left h1 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+
+    .page-hero-right {
+      text-align: right;
+    }
+
+    .page-hero-right p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 340px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--warm-white);
+      padding: 2rem 6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+    }
+
+    .filter-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.4rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+
+    .filter-count {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* ── PRODUCTS GRID ── */
+    .products-section {
+      padding: 4rem 6rem 6rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .sofa-card {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .sofa-card:hover { transform: translateY(-6px); }
+
+    .sofa-img-wrap {
+      overflow: hidden;
+      background: var(--cream);
+      aspect-ratio: 4/3;
+      margin-bottom: 1.4rem;
+      position: relative;
+      border-radius: 12px;
+    }
+
+    .sofa-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+
+    .sofa-card:hover .sofa-img-wrap img { transform: scale(1.05); }
+
+    .sofa-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--brown);
+      color: #fff;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+    }
+
+    .sofa-badge.gold { background: var(--gold); }
+
+    .sofa-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .sofa-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .sofa-desc {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .sofa-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sofa-price {
+      font-size: 1.05rem;
+      color: var(--brown);
+      font-weight: 500;
+    }
+
+    .sofa-price span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+    }
+
+    .btn-view {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--brown);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-view:hover {
+      background: var(--brown);
+      color: #fff;
+    }
+
+    /* hidden cards */
+    .sofa-card.hidden { display: none; }
+
+    /* ── BOTTOM BANNER ── */
+    .bottom-banner {
+      background: var(--brown);
+      padding: 4rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bottom-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .bottom-banner h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .btn-light {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-left: 3rem;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .btn-light:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0F08;
+      padding: 4rem 6rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.9;
+      max-width: 260px;
+      margin-top: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(196,151,58,0.3);
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold-light);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html" class="active">Collection</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">Our Story</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-left">
+      <p>Our Collection</p>
+      <h1>Sofas for Every<br><em>Kind of Home</em></h1>
+    </div>
+    <div class="page-hero-right">
+      <p>Six carefully considered designs — each one built around a different way of living, a different kind of room, a different feeling of home.</p>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter by</span>
+    <button class="filter-btn active" onclick="filterSofas('all', this)">All</button>
+    <button class="filter-btn" onclick="filterSofas('sectional', this)">Sectionals</button>
+    <button class="filter-btn" onclick="filterSofas('3-seater', this)">3-Seaters</button>
+    <button class="filter-btn" onclick="filterSofas('2-seater', this)">2-Seaters</button>
+    <button class="filter-btn" onclick="filterSofas('recliner', this)">Recliners</button>
+    <span class="filter-count" id="filterCount">Showing 6 sofas</span>
+  </div>
+
+  <!-- PRODUCTS GRID -->
+  <section class="products-section">
+    <div class="products-grid" id="productsGrid">
+
+      <div class="sofa-card" data-type="3-seater">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80" alt="The Haveli"/>
+          <span class="sofa-badge">Bestseller</span>
+        </div>
+        <p class="sofa-type">3-Seater</p>
+        <h3 class="sofa-name">The Haveli</h3>
+        <p class="sofa-desc">Deep seats, high arms, and a silhouette that fills any room with quiet confidence. Available in 12 fabrics.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹68,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+      <div class="sofa-card" data-type="2-seater">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&q=80" alt="The Baithak"/>
+          <span class="sofa-badge gold">New Arrival</span>
+        </div>
+        <p class="sofa-type">2-Seater</p>
+        <h3 class="sofa-name">The Baithak</h3>
+        <p class="sofa-desc">Low and wide, inspired by the warmth of a traditional Indian sitting room. Perfect for intimate spaces.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹54,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+      <div class="sofa-card" data-type="3-seater">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=600&q=80" alt="The Sandhya"/>
+          <span class="sofa-badge gold">Editor's Pick</span>
+        </div>
+        <p class="sofa-type">3-Seater</p>
+        <h3 class="sofa-name">The Sandhya</h3>
+        <p class="sofa-desc">Named after dusk — warm tones, soft curves, built for evening conversations and quiet moments.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹82,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+      <div class="sofa-card" data-type="sectional">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="The Darbar"/>
+        </div>
+        <p class="sofa-type">Sectional</p>
+        <h3 class="sofa-name">The Darbar</h3>
+        <p class="sofa-desc">Grand, generous and commanding. Named after a royal court — for living rooms that deserve a centrepiece.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹1,24,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+      <div class="sofa-card" data-type="2-seater">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="The Mehfil"/>
+        </div>
+        <p class="sofa-type">2-Seater</p>
+        <h3 class="sofa-name">The Mehfil</h3>
+        <p class="sofa-desc">For two people and a good conversation. Compact, elegant and deeply comfortable — named after an intimate gathering.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹46,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+      <div class="sofa-card" data-type="recliner">
+        <div class="sofa-img-wrap">
+          <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80" alt="The Verandah"/>
+        </div>
+        <p class="sofa-type">Recliner</p>
+        <h3 class="sofa-name">The Verandah</h3>
+        <p class="sofa-desc">The most relaxed seat in the house. Named after the spot every Indian home saves for its best evenings.</p>
+        <div class="sofa-footer">
+          <div class="sofa-price">₹95,000 <span>Starting price</span></div>
+          <a href="#" class="btn-view">View Details</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOTTOM BANNER -->
+  <div class="bottom-banner">
+    <h2>Can't find what<br>you're looking for? <em>Let's talk.</em></h2>
+    <a href="contact.html" class="btn-light">Get in Touch</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="display:block; margin-bottom:1rem;">Comfort <span style="color:var(--gold-light)">&</span> Co.</a>
+        <p>Sofas designed for the way you actually live. Made in India, built for every home.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="#">Sectionals</a></li>
+          <li><a href="#">3-Seaters</a></li>
+          <li><a href="#">2-Seaters</a></li>
+          <li><a href="#">Recliners</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">hello@comfortandco.in</a></li>
+          <li><a href="#">+91 98300 00000</a></li>
+          <li><a href="#">Park Street, Kolkata</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Comfort & Co. All rights reserved.</p>
+      <p>Designed with care in Kolkata, India.</p>
+    </div>
+  </footer>
+
+  <script>
+    function filterSofas(type, btn) {
+      const cards = document.querySelectorAll('.sofa-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      const countEl = document.getElementById('filterCount');
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      cards.forEach(card => {
+        if (type === 'all' || card.dataset.type === type) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      countEl.textContent = `Showing ${visible} sofa${visible !== 1 ? 's' : ''}`;
+    }
+  </script>
+
+</body>
+</html>
