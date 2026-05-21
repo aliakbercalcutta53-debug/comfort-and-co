@@ -561,6 +561,86 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.1rem 0.2rem;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--brown);
+        flex-direction: column;
+        padding: 1.2rem 1.5rem 1.5rem;
+        gap: 1.2rem;
+        border-top: 1px solid rgba(255,255,255,0.12);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 58px;
+      }
+      .hero-right { height: 65vw; order: -1; }
+      .hero-left  { padding: 3rem 1.5rem 2.5rem; order: 0; }
+      .hero-badge { display: none; }
+
+      section { padding: 3rem 1.5rem; }
+
+      .featured-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .sofas-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .story {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 1.5rem;
+      }
+      .story-img-accent { display: none; }
+
+      .why-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+      .cta-banner {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+      .cta-banner .btn-light { margin-left: 0; }
+
+      footer { padding: 3rem 1.5rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -568,6 +648,7 @@
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
     <ul class="nav-links">
   <li><a href="index.html">Home</a></li>
   <li><a href="pages/products.html">Collection</a></li>
@@ -753,5 +834,11 @@
     </div>
   </footer>
 
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
 </body>
 </html>

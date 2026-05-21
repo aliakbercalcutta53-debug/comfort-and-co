@@ -532,6 +532,66 @@
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.1rem 0.2rem;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--brown);
+        flex-direction: column;
+        padding: 1.2rem 1.5rem 1.5rem;
+        gap: 1.2rem;
+        border-top: 1px solid rgba(255,255,255,0.12);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+
+      .about-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 58px;
+      }
+      .about-hero-left { height: 60vw; }
+      .about-hero-right { padding: 3rem 1.5rem; }
+
+      .founder-letter { padding: 4rem 0; }
+
+      .story-images {
+        grid-template-columns: 1fr;
+        padding: 1rem 1.5rem 3rem;
+        gap: 1rem;
+      }
+      .story-images img:not(:first-child) { aspect-ratio: 4/3; }
+
+      .values { padding: 4rem 1.5rem; }
+      .values-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+      .team { padding: 4rem 1.5rem; }
+      .team-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .closing-cta { padding: 4rem 1.5rem; }
+
+      footer { padding: 3rem 1.5rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -539,6 +599,7 @@
   <!-- NAV -->
   <nav>
     <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="products.html">Collection</a></li>
@@ -697,5 +758,11 @@
     </div>
   </footer>
 
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
 </body>
 </html>

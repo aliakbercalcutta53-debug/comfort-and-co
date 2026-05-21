@@ -408,6 +408,77 @@
     }
 
     .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    /* ── HAMBURGER ── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.1rem 0.2rem;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--brown);
+        flex-direction: column;
+        padding: 1.2rem 1.5rem 1.5rem;
+        gap: 1.2rem;
+        border-top: 1px solid rgba(255,255,255,0.12);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+
+      .page-hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 1.5rem 3rem;
+        gap: 2rem;
+      }
+      .hero-stat-row { gap: 1.5rem; }
+
+      .filter-bar {
+        padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+        top: 58px;
+        gap: 0.6rem;
+      }
+      .filter-count { width: 100%; margin-left: 0; }
+
+      .projects-section { padding: 2rem 1.5rem 4rem; }
+      .projects-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .project-card.large,
+      .project-card.small,
+      .project-card.medium,
+      .project-card.wide { grid-column: span 1; }
+      .project-card.large  .project-img,
+      .project-card.small  .project-img { height: 240px; }
+      .project-card.medium .project-img { height: 220px; }
+      .project-card.wide   .project-img { height: 200px; }
+
+      .pull-quote { padding: 3rem 1.5rem; }
+
+      .cta-banner {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+      .cta-banner .btn-primary { margin-left: 0; }
+
+      footer { padding: 3rem 1.5rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -415,6 +486,7 @@
   <!-- NAV -->
   <nav>
     <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="products.html">Collection</a></li>
@@ -612,6 +684,11 @@
   </footer>
 
   <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
     function filterProjects(type, btn) {
       const cards = document.querySelectorAll('.project-card');
       const buttons = document.querySelectorAll('.filter-btn');
