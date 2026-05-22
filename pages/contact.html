@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us — Comfort & Co.</title>
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -48,6 +49,16 @@
       color: #F7F2EB;
       letter-spacing: 0.04em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 7px;
+      flex-shrink: 0;
     }
 
     .nav-logo span { color: var(--gold-light); }
@@ -692,7 +703,10 @@
 
   <!-- NAV -->
   <nav>
-    <a href="../index.html" class="nav-logo">Comfort <span>&</span> Co.</a>
+    <a href="../index.html" class="nav-logo">
+      <img src="../images/logo.svg" class="nav-logo-img" alt=""/>
+      Comfort <span>&</span> Co.
+    </a>
     <button class="nav-toggle" aria-label="Menu">☰</button>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
@@ -864,7 +878,10 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="../index.html" class="nav-logo" style="display:block; margin-bottom:1rem;">Comfort <span style="color:var(--gold-light)">&</span> Co.</a>
+        <a href="../index.html" class="nav-logo" style="margin-bottom:1rem;">
+          <img src="../images/logo.svg" class="nav-logo-img" alt=""/>
+          Comfort <span style="color:var(--gold-light)">&</span> Co.
+        </a>
         <p>Sofas designed for the way you actually live. Made in India, built for every home.</p>
       </div>
       <div class="footer-col">

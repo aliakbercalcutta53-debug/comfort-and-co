@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" rx="14" fill="#6B4226"/>
+  <!-- Inner gold border -->
+  <rect x="5" y="5" width="90" height="90" rx="10" fill="none" stroke="#C4973A" stroke-width="0.9" opacity="0.75"/>
+
+  <!-- Sofa backrest -->
+  <rect x="18" y="26" width="64" height="26" rx="8" fill="#E2BA6A"/>
+  <!-- Subtle highlight on backrest top -->
+  <rect x="18" y="26" width="64" height="8" rx="8" fill="#F7F2EB" opacity="0.12"/>
+
+  <!-- Left arm -->
+  <rect x="13" y="33" width="12" height="27" rx="5" fill="#C4973A"/>
+  <!-- Right arm -->
+  <rect x="75" y="33" width="12" height="27" rx="5" fill="#C4973A"/>
+
+  <!-- Seat cushion left -->
+  <rect x="22" y="50" width="26" height="12" rx="4" fill="#C4973A"/>
+  <!-- Seat cushion right -->
+  <rect x="52" y="50" width="26" height="12" rx="4" fill="#C4973A"/>
+  <!-- Cushion gap line -->
+  <rect x="49" y="50" width="2" height="12" fill="#6B4226" opacity="0.4"/>
+
+  <!-- Sofa base/skirt -->
+  <rect x="23" y="62" width="54" height="5" rx="2.5" fill="#9C6B45"/>
+
+  <!-- Legs -->
+  <rect x="29" y="67" width="5" height="9" rx="1.5" fill="#9C6B45"/>
+  <rect x="66" y="67" width="5" height="9" rx="1.5" fill="#9C6B45"/>
+
+  <!-- Decorative gold rule below sofa -->
+  <line x1="30" y1="84" x2="70" y2="84" stroke="#C4973A" stroke-width="0.6" opacity="0.5"/>
+</svg>
